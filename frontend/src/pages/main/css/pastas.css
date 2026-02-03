@@ -1,0 +1,95 @@
+:root {
+    --brand: #c49b17;
+    --bg: #0f1115;
+    --text: #e5e7eb;
+    --muted: #9ca3af;
+    --card: #151923;
+    --border: #252b36;
+    --shadow: 0 8px 16px rgba(0, 0, 0, .35), 0 2px 6px rgba(0, 0, 0, .25);
+}
+
+* {
+    font: 1rem "Montesserat", sans-serif;
+    margin: 0;
+    color: var(--text);
+}
+
+body {
+    scroll-behavior: smooth;
+    background: var(--bg);
+    color: var(--text);
+}
+
+.container {
+    margin: 10px;
+    display: flex;
+    justify-content: center;
+    border: 1px solid var(--border);
+    width: 100vw;
+    height: 80vh;
+}
+
+.search-bar {
+    display: flex;
+    margin-top: 30px;
+}
+
+#search {
+    width: 50vw;
+    height: 7%;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background-color: var(--muted);
+    padding-left: 10px;
+}
+
+#search::placeholder {
+    color: var(--text);
+}
+
+.lupa {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 10px;
+    border: 2px solid var(--border);
+    border-radius: 10px;
+    height: max-content;
+}
+
+.lupa i {
+    margin: 9px
+}
+
+.btn-lupa {
+    /* * Todos esses parametros são necessário para deixar o botao invisível */
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+    outline: inherit;
+    font: inherit;
+    color: inherit;
+    appearance: none;
+}
+
+@keyframes suave {
+    from {
+        border-color: var(--border);
+    }
+
+    to {
+        border-color: var(--brand);
+    }
+}
+
+.lupa:hover {
+    border-color: var(--brand);
+    animation: suave 0.6s normal;
+}
+
+#search:focus {
+    outline-color: var(--brand);
+    animation: suave 0.6s normal;
+}
