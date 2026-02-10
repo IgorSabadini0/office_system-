@@ -6,6 +6,7 @@ import cors from 'cors';
 import db from './config/db.js';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { error } from 'console';              
 
 config();
 
@@ -31,22 +32,9 @@ app.get('/', (req, res) => {
 // ---------------------  G E T  => LISTAR  ---------------------
 
 app.get('/login', async (req, res) => { // *req*  é a requisição que esta sendo feita // e o *res* é a resposta da requisição 
-    const [users] = await db.query('SELECT user FROM login');
+    const user = req.body.user;
+    const password = req.body.password;
 
-    res.status(200).json(users);
-});
-
-// ---------------------  P U T  => EDITAR ---------------------
-
-app.put('/login/:id', async (req, res) => {
-    const { id } = req.params;
-    const { user } = req.body;
-    try {
-        const [result] = await db.query("UPDATE login SET user = ? WHERE id = ?", [user, id]);
-        res.status(200).json(result);
-    } catch (error) {
-        res.status(500).json({ error: error.message });
-    }
 });
 
 const port = process.env.PORT_SERVER;
@@ -56,6 +44,7 @@ app.listen(port, host, () => {
     console.log(`Servidor rodando na porta ${port} e no ${host}`);
 });
 
+console.log(process.env.SECRET_KEY)
 /* 
     Criar nossa API de Usuários
 
