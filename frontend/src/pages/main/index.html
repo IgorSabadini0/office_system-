@@ -14,56 +14,62 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap"
         rel="stylesheet">
+    <script src="https://kit.fontawesome.com/a8f4be2bb0.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
     <div class="container">
-        <div class="search-bar">
-            <div class="pesquisa">
-                <input type="text" id="search" placeholder="Pesquisar (Pastas, Clientes e etc.)"
-                    onkeypress="handleKeyPress(event)">
-            </div>
-            <div class="lupa">
-                <button class="btn-lupa" onclick="buscar()" aria-label="Buscar">
-                    <i class="fa-solid fa-magnifying-glass"></i>
-                </button>
-            </div>
-            <div class="logout">
-                <input type="button" value="Sair" onclick="sair()">
-            </div>
-        </div>
 
-        <!-- Loading State -->
+        <div class="header-controls">
+
+            <div class="brand-logo">
+                <img src="../../../public/logo.svg" alt="Logo Palhares Ferreira">
+            </div>
+
+            <div class="search-bar">
+                <div class="pesquisa">
+                    <input type="text" id="search" placeholder="Pesquisar (Pastas, Clientes...)"
+                        onkeypress="handleKeyPress(event)">
+                </div>
+                <div class="lupa">
+                    <button class="btn-lupa" onclick="buscar()" aria-label="Buscar">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </button>
+                </div>
+                <div class="logout">
+                    <input type="button" value="Sair" onclick="sair()">
+                </div>
+            </div>
+
+            <div class="filter-buttons">
+                <button class="filter-btn active" onclick="filterResults('all')">Todos</button>
+                <button class="filter-btn" onclick="filterResults('pasta')">Pastas</button>
+                <button class="filter-btn" onclick="filterResults('cliente')">Clientes</button>
+                <button class="filter-btn" onclick="filterResults('documento')">Documentos</button>
+            </div>
+
+        </div>
         <div class="loading" id="loading">
             <div class="spinner"></div>
             <p class="loading-text">Buscando documentos...</p>
         </div>
 
-        <!-- Results Container -->
         <div class="results-container" id="resultsContainer">
-            <div class="results-header">
-                <div class="results-count" id="resultsCount"></div>
-                <div class="filter-buttons">
-                    <button class="filter-btn active" onclick="filterResults('all')">Todos</button>
-                    <button class="filter-btn" onclick="filterResults('pasta')">Pastas</button>
-                    <button class="filter-btn" onclick="filterResults('cliente')">Clientes</button>
-                    <button class="filter-btn" onclick="filterResults('documento')">Documentos</button>
-                </div>
-            </div>
+            <div class="results-count" id="resultsCount"></div>
+
             <div class="results-grid" id="resultsGrid"></div>
         </div>
 
-        <!-- Empty State -->
-        <div class="empty-state" id="emptyState">
+        <div class="empty-state" id="emptyState" style="display: none;">
             <div class="empty-icon">
                 <i class="fa-solid fa-folder-open"></i>
             </div>
-            <h3>Nenhum resultado encontrado</h3>
-            <p>Digite um termo de pesquisa para encontrar pastas, clientes ou documentos.</p>
+            <p></p>
         </div>
+
     </div>
+
     <script src="js/pastas.js"></script>
-    <script src="https://kit.fontawesome.com/a8f4be2bb0.js" crossorigin="anonymous"></script>
 </body>
 
 </html>

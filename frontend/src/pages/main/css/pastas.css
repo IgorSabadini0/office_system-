@@ -200,6 +200,8 @@ body {
 }
 
 .filter-buttons {
+    justify-content: flex-end;
+    width: 100%;
     display: flex;
     gap: 10px;
 }
@@ -546,5 +548,57 @@ body {
 
     .empty-state h3 {
         font-size: 1.2rem;
+    }
+}
+
+/* 1. Configuração do Container Pai */
+.header-controls {
+    display: flex;
+    flex-direction: column; /* Celular: um embaixo do outro */
+    gap: 20px;
+    margin-bottom: 30px;
+    width: 100%;
+}
+
+/* 2. Logo (Padrão: Escondido no celular) */
+.brand-logo {
+    display: none;
+}
+
+.brand-logo img {
+    height: 55px; /* Altura da logo */
+    width: auto;
+    display: block;
+}
+
+/* 3. Ajuste para a Barra de Pesquisa existente */
+/* Removemos a margem inferior padrão dela para o alinhamento funcionar */
+.header-controls .search-bar {
+    margin-bottom: 0;
+    width: 100%;
+}
+
+/* 4. Regras para Telas Grandes (Tablet/PC - acima de 768px) */
+@media (min-width: 1000px) { /* Aumentei um pouco para caber tudo na linha */
+    
+    .header-controls {
+        flex-direction: row; /* Coloca tudo lado a lado */
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .brand-logo {
+        display: block; /* Mostra a logo */
+        margin-right: 20px; /* Espaço entre logo e pesquisa */
+    }
+
+    /* A pesquisa ocupa o espaço que sobrar no meio */
+    .header-controls .search-bar {
+        flex: 1;
+        max-width: 600px; /* Limita a largura para não ficar gigante */
+    }
+
+    .filter-buttons {
+        width: auto; /* Botões ocupam apenas o espaço necessário */
     }
 }
