@@ -24,6 +24,16 @@ const staticPath = path.join(__dirname, '../../frontend/src');
 app.use(express.static(staticPath));
 // ---------------------  G E T  => LISTAR  ---------------------
 
+app.get('/', (req, res) => {
+    res.redirect('/pages/auth/index.html');
+});
+
+app.get('/main', (req, res) => {
+    res.redirect('/pages/main/index.html');
+});
+
+
+
 app.get('/auth', async (req, res) => { // *req*  é a requisição que esta sendo feita // e o *res* é a resposta da requisição 
     const puxarDados = "SELECT * FROM pessoas WHERE id = ?;";
     const valores = 2;
