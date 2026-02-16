@@ -29,7 +29,7 @@ app.get('/', (req, res) => {
     res.redirect('pages/auth/index.html');
 })
 
-app.post('/post', async (req, res) => {
+app.post('/auth', async (req, res) => {
     const user = req.body.user;
     const password = req.body.password;
 
