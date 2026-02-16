@@ -6,7 +6,8 @@ import cors from 'cors';
 import db from './config/db.js';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { error } from 'console';              
+import { error } from 'console';
+import { create } from 'domain';
 
 config();
 
@@ -25,22 +26,38 @@ app.use(express.static(staticPath));
 // ---------------------  G E T  => LISTAR  ---------------------
 
 app.get('/', (req, res) => {
-    res.redirect('/pages/auth/index.html');
-});
+    res.redirect('pages/auth/index.html');
+})
 
-app.get('/main', (req, res) => {
-    res.redirect('/pages/main/index.html');
-});
+app.post('/post', async (req, res) => {
+    const user = req.body.user;
+    const password = req.body.password;
 
+    try {
+        const verificarDB = "SELECT user, password FROM login WHERE user = ? AND password = ?"; // Isso quer dizer que o PRIMEIRO que encontrar com esse USER pare a busca. SEMPRE SERÁ RETORNADO UM ARRAY [].
+        const [rows] = await db.query(verificarDB, [user, password]);
 
+        if (rows.length === 0) {
+            return res.status(401).json({ mensagem: 'E-mail ou senha inválidos. ' });
+        }
 
-app.get('/auth', async (req, res) => { // *req*  é a requisição que esta sendo feita // e o *res* é a resposta da requisição 
-    const puxarDados = "SELECT * FROM pessoas WHERE id = ?;";
-    const valores = 2;
-    const dadosRecebidos = await db.query(puxarDados, valores); // isso se torna um arry, os valores das querys vem na primeira posição do array (ou seja array[0])
-    res.json(dadosRecebidos[0]);
-    res.status(200);
-});
+        const usuario = rows[0];
+
+        return res.status(200).json({
+            mensagem: 'Login efetuado com sucesso',
+            redirectUrl: '/pages/main/index.html',
+            usuario: {
+                id: usuario.id,
+                nome: usuario.user
+            }
+        });
+
+    } catch (e) {
+        console.error(error);
+        return res.status(500).json({ mensagem: 'Erro interno no servidor.' });
+    }
+})
+
 
 const port = process.env.PORT_SERVER;
 const host = process.env.HOST_SERVER;
