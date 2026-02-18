@@ -63,7 +63,7 @@ const port = process.env.PORT_SERVER;
 const host = process.env.HOST_SERVER;
 
 app.listen(port, host, () => {
-    console.log(`Servidor rodando na porta ${port} e no ${host}`);
+    console.log(`Servidor rodando em http://localhost:${port}`);
 });
 
 console.log(process.env.SECRET_KEY)
